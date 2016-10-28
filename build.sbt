@@ -9,9 +9,12 @@ resolvers ++= Seq(
   Resolver.sonatypeRepo("snapshots")
 )
 
+
 libraryDependencies ++= Seq(
-  "com.chuusai" %% "shapeless" % "2.3.2",
-  "io.argonaut" %% "argonaut"  % "6.1" 
+  "com.chuusai" %% "shapeless"            % "2.3.2",
+  "io.argonaut" %% "argonaut"             % "6.2-M3",
+  "org.specs2"  %% "specs2-core"          % "3.8.5" % "test",
+  "org.specs2"  %% "specs2-matcher-extra" % "3.8.5" % "test"
 )
 
 scalacOptions ++= Seq(
