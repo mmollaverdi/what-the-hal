@@ -1,5 +1,7 @@
 # what-the-hal
 
+## Intro
+
 This repository models a HAL Resource based on [HAL specification](http://stateless.co/hal_specification.html) and provides [Argonaut](http://argonaut.io/) JSON encoders for the models (Argonaut is a purely functional Scala JSON library).
 This was originally implemented a while ago and used in a Scala micro service at REA Group for generating HAL JSON responses. I had published it in a public github gist before [here](https://gist.github.com/mmollaverdi/de79ede5d9054f75b72a), but I've now open sourced it in this repository for further exposure.
 
@@ -137,3 +139,8 @@ Different embedded resource within a HAL resource can have different types of st
   ```scala
   val json = halResource.asJson.nospaces
   ```
+
+## TODOs
+
+- Add [circe library](https://github.com/travisbrown/circe) integration 
+- Implement JSON decoders
