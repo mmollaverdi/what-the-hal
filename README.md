@@ -83,7 +83,35 @@ In this example
 
 Each embedded resource is a HAL resource itself, hence the need for a recursive data structure. In the example above, `image` is an embedded resource which has a `title` as "state" and a `self` "link", but no nested embedded resources.
 
-Different embedded resource within a HAL resource can have different types of state. In the example above, `image` and `listers` are embedded resources with different state (data) types. I've used [Shapeless](https://github.com/milessabin/shapeless) [Heterogenous lists](https://github.com/milessabin/shapeless/wiki/Feature-overview:-shapeless-2.0.0#heterogenous-lists) to preserve the type of each embedded resource.
+## Why Shapeless
+
+Different embedded resource within a HAL resource can have different types of state. In the example above, `image` and `listers` are embedded resources with different state (data) types. Scala built-in collections lose the type information for individual elements when populated with elements of different types. For example: 
+
+```scala
+scala> List(1, "str", true)
+<console>:12: warning: a type was inferred to be `Any`; this may indicate a programming error.
+       List(1, "str", true)
+            ^
+res0: List[Any] = List(1, str, true)
+
+scala> res0.head
+res1: Any = 1
+```
+
+[Shapeless](https://github.com/milessabin/shapeless) [Heterogenous lists](https://github.com/milessabin/shapeless/wiki/Feature-overview:-shapeless-2.0.0#heterogenous-lists) (aka `HList`s) on the other hand, preserve the type for each element. For example:
+
+```scala
+scala> import shapeless._
+import shapeless._
+
+scala> 1 :: "str" :: true :: HNil
+res2: shapeless.::[Int,shapeless.::[String,shapeless.::[Boolean,shapeless.HNil]]] = 1 :: str :: true :: HNil
+
+scala> res2.head
+res3: Int = 1
+```
+ 
+That's why I've used Shepeless `HList`s to model collection of embedded resources.
 
 ## How to use
 
